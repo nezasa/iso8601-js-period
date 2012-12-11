@@ -1,9 +1,11 @@
+Shared and maintained by [Nezasa](http://www.nezasa.com) | Published under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html) | © Nezasa, 2012
+
+---
+
 # iso8601-js-period
 
 Javascript library for parsing of ISO 8601 durations. Supported are durations of
 the form P3Y6M4DT12H30M17S or PT1S or P1Y4DT1H3S etc.
-
-Shared and maintained by [Nezasa](http://www.nezasa.com) | Published under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 For documentation of ISO 8601, see
 
@@ -46,8 +48,8 @@ would be
 
 -   ```['years', 'months', 'days', 'hours', 'minutes', 'seconds']```
 
-The English versions as shown above are the default in case nothing is defined
-and thus hard-coded in the library.
+The English versions as shown above represent the default, thus the English unit names
+are used if unitNames and unitNamesPlural remain ```undefined```.
 
 ## Sample code
 
