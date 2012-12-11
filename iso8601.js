@@ -1,8 +1,14 @@
 /*
- * Shared and mainted by Nezasa.
- * Code licensed under Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0), 
- * documentation under CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/).
+ * Shared and maintained by [Nezasa](http://www.nezasa.com)
+ * Published under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html)
+ * © Nezasa, 2012
+ *
+ * ---
+ *
+ * Javascript library for parsing of ISO 8601 durations. Supported are durations of 
+ * the form P3Y6M4DT12H30M17S or PT1S or P1Y4DT1H3S etc.
  */
+
 (function( nezasa, undefined ) {
   
   // create sub packages
@@ -39,12 +45,12 @@
    */
   nezasa.iso8601.Period.parseToTotalSeconds = function(period) {
     
-    var multiplicators = [360*24*60*60 /*year*/, 
-                          30*24*60*60 /*month*/, 
-                          24*60*60 /*day*/, 
-                          60*60 /*hour*/, 
-                          60 /*minute*/, 
-                          1 /*second*/];    
+    var multiplicators = [31104000 /* year   (360*24*60*60) */, 
+                          2592000  /* month  (30*24*60*60) */, 
+                          86400    /* day    (24*60*60) */, 
+                          3600     /* hour   (60*60) */, 
+                          60       /* minute (60) */, 
+                          1        /* second (1) */];    
     var durationPerUnit = parsePeriodString(period);
     var durationInSeconds = 0;
     
@@ -80,7 +86,7 @@
       }
     }
     
-    // trim because of space at very end because of join(" ")
+    // trim because of space at very end and because of join(" ")
     // replace double spaces because of join(" ") and empty strings
     return result.join(' ').trim().replace(/\ \ /g, ' ');    
   };
