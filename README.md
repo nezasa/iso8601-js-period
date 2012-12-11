@@ -18,7 +18,7 @@ For documentation of ISO 8601, see
 All methods of this library are published within the namespace
 ```nezasa.iso8601.period```. The following methods are currently available.
 
-### Method ```Array[int] nezasa.iso8601.period.parse(String period)```
+**Method** ```Array[int] nezasa.iso8601.period.parse(String period)```
 
 Takes a ISO 8601 formatted duration and returns an array with 6 elements, one
 per unit. The order of the units, starting with the first element of the array,
@@ -32,12 +32,12 @@ Example:
 
 -   “P3Y6M4DT12H30M17S” =\> ```[3, 6, 4, 12, 30, 17]```
 
-### Method ```int nezasa.iso8601.Period.parseToTotalSeconds(String period)```
+**Method** ```int nezasa.iso8601.Period.parseToTotalSeconds(String period)```
 
 Takes a ISO 8601 formatted duration and returns the total amount of seconds
 represented by the duration.
 
-### Method ```String nezasa.iso8601.Period.parseToString(String period, Array[String] unitNames, Array[String] unitNamesPlural)```
+**Method** ```String nezasa.iso8601.Period.parseToString(String period, Array[String] unitNames, Array[String] unitNamesPlural)```
 
 Takes a ISO 8601 formatted duration and returns a more natural representation of
 the period. In order to handle different languages, the method takes two input
