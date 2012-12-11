@@ -63,20 +63,20 @@
    * @param unitNamePlural thenames of the time units if there are several (such as hours or minutes).
    *        Defaults to ['years', 'months', 'days', 'hours', 'minutes', 'seconds'].
    */
-  nezasa.iso8601.Period.parseToString = function(period, unitName, unitNamePlural) {
+  nezasa.iso8601.Period.parseToString = function(period, unitNames, unitNamesPlural) {
     
     var result = ['', '', '', '', '', ''];
     var durationPerUnit = parsePeriodString(period);
     
     // input validation (use english as default)
-    if (!unitName)       unitName       = ['year', 'month', 'day', 'hour', 'minute', 'second'];
-    if (!unitNamePlural) unitNamePlural = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'];
+    if (!unitNames)       unitNames       = ['year', 'month', 'day', 'hour', 'minute', 'second'];
+    if (!unitNamesPlural) unitNamesPlural = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'];
     
     // assemble string per unit
     for (var i = 0; i < durationPerUnit.length; i++) {
       if (durationPerUnit[i] > 0) {
-        if   (durationPerUnit[i] == 1) result[i] = durationPerUnit[i] + " " + unitName[i];
-        else                           result[i] = durationPerUnit[i] + " " + unitNamePlural[i]; 
+        if   (durationPerUnit[i] == 1) result[i] = durationPerUnit[i] + " " + unitNames[i];
+        else                           result[i] = durationPerUnit[i] + " " + unitNamesPlural[i]; 
       }
     }
     
