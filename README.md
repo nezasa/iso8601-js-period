@@ -44,9 +44,9 @@ the period. In order to handle different languages, the method takes two input
 arrays two define the unit names in singular and plural, e.g., for English it
 would be
 
--   ```['year', 'month', 'day', 'hour', 'minute', 'second']```
+-   ```['year', 'month', 'week', 'day', 'hour', 'minute', 'second']```
 
--   ```['years', 'months', 'days', 'hours', 'minutes', 'seconds']```
+-   ```['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds']```
 
 The English versions as shown above represent the default, thus the English unit names
 are used if unitNames and unitNamesPlural remain ```undefined```.
