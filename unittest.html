@@ -56,17 +56,17 @@
       var resultCell = document.createElement('td');
       resultCell.innerHTML = result;
       row.appendChild(resultCell);
-      
       var expectedResultCell = document.createElement('td');
       expectedResultCell.innerHTML = expectedResult;
       row.appendChild(expectedResultCell);
-      
       var testStatusCell = document.createElement('td');
       if (result == expectedResult) {
         testStatusCell.innerHTML = "ok";
         row.setAttribute('class', 'status success')
       }
       else {
+        console.log("|"+result+"|");
+        console.log("|"+expectedResult+"|");
         testStatusCell.innerHTML = "failed";
         row.setAttribute('class', 'status error')
       }
@@ -74,13 +74,14 @@
     };
     
     /* test parsing */
-    test(nezasa.iso8601.Period.parse("PT1S"), "Array output - 1 second", "PT1S", "0,0,0,0,0,1");
-    test(nezasa.iso8601.Period.parse("PT1M"), "Array output - 1 minute", "PT1M", "0,0,0,0,1,0"); 
-    test(nezasa.iso8601.Period.parse("PT1H"), "Array output - 1 hour", "PT1H", "0,0,0,1,0,0");
-    test(nezasa.iso8601.Period.parse("P1D"), "Array output - 1 day", "P1D", "0,0,1,0,0,0");
-    test(nezasa.iso8601.Period.parse("P1M"), "Array output - 1 mounth", "P1M", "0,1,0,0,0,0");
-    test(nezasa.iso8601.Period.parse("P1Y"), "Array output - 1 year", "P1Y", "1,0,0,0,0,0");
-    test(nezasa.iso8601.Period.parse("P3Y6M4DT12H30M17S"), "Array output - combined period example", "P3Y6M4DT12H30M17S", "3,6,4,12,30,17");
+    test(nezasa.iso8601.Period.parse("PT1S"), "Array output - 1 second", "PT1S", "0,0,0,0,0,0,1");
+    test(nezasa.iso8601.Period.parse("PT1M"), "Array output - 1 minute", "PT1M", "0,0,0,0,0,1,0");
+    test(nezasa.iso8601.Period.parse("PT1H"), "Array output - 1 hour", "PT1H", "0,0,0,0,1,0,0");
+    test(nezasa.iso8601.Period.parse("P1D"), "Array output - 1 day", "P1D", "0,0,0,1,0,0,0");
+    test(nezasa.iso8601.Period.parse("P1W"), "Array output - 1 week", "P1D", "0,0,1,0,0,0,0");
+    test(nezasa.iso8601.Period.parse("P1M"), "Array output - 1 mounth", "P1M", "0,1,0,0,0,0,0");
+    test(nezasa.iso8601.Period.parse("P1Y"), "Array output - 1 year", "P1Y", "1,0,0,0,0,0,0");
+    test(nezasa.iso8601.Period.parse("P3Y6M1W4DT12H30M17S"), "Array output - combined period example", "P3Y61WM4DT12H30M17S", "3,6,1,4,12,30,17");
 
     
     /* test total duration */
@@ -88,7 +89,8 @@
     test(nezasa.iso8601.Period.parseToTotalSeconds("PT1M"), "total duration - 1 minute", "PT1M", 60); 
     test(nezasa.iso8601.Period.parseToTotalSeconds("PT1H"), "total duration - 1 hour", "PT1H", 60*60);
     test(nezasa.iso8601.Period.parseToTotalSeconds("P1D"), "total duration - 1 day", "P1D", 24*60*60);
-    test(nezasa.iso8601.Period.parseToTotalSeconds("P1M"), "total duration - 1 mounth", "P1M", 30*24*60*60);
+    test(nezasa.iso8601.Period.parseToTotalSeconds("P1W"), "total duration - 1 week", "P1W", 24*60*60*7);
+    test(nezasa.iso8601.Period.parseToTotalSeconds("P1M"), "total duration - 1 month", "P1M", 30*24*60*60);
     test(nezasa.iso8601.Period.parseToTotalSeconds("P1Y"), "total duration - 1 year", "P1Y", 360*24*60*60);
     test(nezasa.iso8601.Period.parseToTotalSeconds("P3Y6M4DT12H30M17S"), "total duration - combined period example", "P3Y6M4DT12H30M17S", ((((3*12+6)*30+4)*24+12)*60+30)*60+17);
     
@@ -97,16 +99,21 @@
     test(nezasa.iso8601.Period.parseToString("PT1M"), "string output - 1 minute", "PT1M", "1 minute"); 
     test(nezasa.iso8601.Period.parseToString("PT1H"), "string output - 1 hour", "PT1H", "1 hour");
     test(nezasa.iso8601.Period.parseToString("P1D"), "string output - 1 day", "P1D", "1 day");
+    test(nezasa.iso8601.Period.parseToString("P1W"), "string output - 1 week", "P1W", "1 week");
     test(nezasa.iso8601.Period.parseToString("P1M"), "string output - 1 month", "P1M", "1 month");
     test(nezasa.iso8601.Period.parseToString("P1Y"), "string output - 1 year", "P1Y", "1 year");
+
+
+    test(nezasa.iso8601.Period.parseToString("PT1H1S"), "string output - combined period example - English units (default)", "PT1H1S", "1 hour 1 second");
+    test(nezasa.iso8601.Period.parseToString("P1WT1H"), "string output - combined period example - English units (default)", "P1W1H", "1 week 1 hour");
     test(nezasa.iso8601.Period.parseToString("P1Y4DT1H13M1S"), "string output - combined period example - English units (default)", "P1Y4DT1H13M1S", "1 year 4 days 1 hour 13 minutes 1 second");
     test(nezasa.iso8601.Period.parseToString("P1Y4DT1H3S"), "string output - combined period example - English units (default)", "P1Y4DT1H3S", "1 year 4 days 1 hour 3 seconds");
     test(nezasa.iso8601.Period.parseToString("P3Y6M4DT12H30M17S"), "string output - combined period example - English units (default)", "P3Y6M4DT12H30M17S", "3 years 6 months 4 days 12 hours 30 minutes 17 seconds");
   
     /* test customized unit strings */
-    var deUnits = ['Jahr', 'Monat', 'Tag', 'Stunde', 'Minute', 'Sekunde'];
-    var deUnitsPlural = ['Jahre', 'Monate', 'Tage', 'Stunden', 'Minuten', 'Sekunden'];
-    test(nezasa.iso8601.Period.parseToString("P3Y6M4DT12H30M17S", deUnits, deUnitsPlural), "string output - combined period example - German units", "P3Y6M4DT12H30M17S", "3 Jahre 6 Monate 4 Tage 12 Stunden 30 Minuten 17 Sekunden");
+    var deUnits = ['Jahr', 'Monat', 'Woche', 'Tag', 'Stunde', 'Minute', 'Sekunde'];
+    var deUnitsPlural = ['Jahre', 'Monate', 'Wochen', 'Tage', 'Stunden', 'Minuten', 'Sekunden'];
+    test(nezasa.iso8601.Period.parseToString("P3Y6M1W4DT12H30M17S", deUnits, deUnitsPlural), "string output - combined period example - German units", "P3Y6M4DT12H30M17S", "3 Jahre 6 Monate 1 Woche 4 Tage 12 Stunden 30 Minuten 17 Sekunden");
     
     $("#cntTotalTests").html($(".status").size());
     $("#cntTotalOkTests").html($(".status.success").size());
