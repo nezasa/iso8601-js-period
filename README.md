@@ -43,7 +43,7 @@ Examples (distrubtedOverflow = true):
 Takes a ISO 8601 formatted duration and returns the total amount of seconds
 represented by the duration.
 
-**Method** ```String nezasa.iso8601.Period.parseToString(String period, Boolean distributeOverflow, Array[String] unitNames, Array[String] unitNamesPlural)```
+**Method** ```String nezasa.iso8601.Period.parseToString(String period, Array[String] unitNames, Array[String] unitNamesPlural, Boolean distributeOverflow)```
 
 Takes a ISO 8601 formatted duration and returns a more natural representation of
 the period. In order to handle different languages, the method takes two input
