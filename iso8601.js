@@ -23,7 +23,7 @@
     /**
      * version of the ISO8601 version
      */
-    nezasa.iso8601.version = '0.1';
+    nezasa.iso8601.version = '0.2';
 
     //---- public methods
 
@@ -39,9 +39,11 @@
      * - array[5]: minutes
      * - array[6]: seconds
      *
+     * @param period iso8601 period string
+     * @param distributeOverflow if 'true', the unit overflows are merge into the next higher units. Defaults to 'false'.
      */
-    nezasa.iso8601.Period.parse = function(period) {
-        return parsePeriodString(period);
+    nezasa.iso8601.Period.parse = function(period, distributeOverflow) {
+        return parsePeriodString(period, distributeOverflow);
     };
 
     /**
@@ -67,7 +69,7 @@
     };
 
     /**
-     * Return boolean based on validity of parse
+     * Return boolean based on validity of period
      * @param period
      * @return {Boolean}
      */
@@ -83,15 +85,16 @@
     /**
      * Returns a more readable string representation of the ISO8601 period.
      * @param period the ISO8601 period string
+     * @param distributeOverflow if 'true', the unit overflows are merge into the next higher units. Defaults to 'false'.
      * @param unitName the names of the time units if there is only one (such as hour or minute).
      *        Defaults to ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'].
      * @param unitNamePlural thenames of the time units if there are several (such as hours or minutes).
      *        Defaults to ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'].
      */
-    nezasa.iso8601.Period.parseToString = function(period, unitNames, unitNamesPlural) {
+    nezasa.iso8601.Period.parseToString = function(period, distributeOverflow, unitNames, unitNamesPlural) {
 
         var result = ['', '', '', '', '', '', ''];
-        var durationPerUnit = parsePeriodString(period);
+        var durationPerUnit = parsePeriodString(period, distributeOverflow);
 
         // input validation (use english as default)
         if (!unitNames)       unitNames       = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'];
@@ -117,8 +120,9 @@
     /**
      * Parses a ISO8601 period string.
      * @param period iso8601 period string
+     * @param _distributeOverflow if 'true', the unit overflows are merge into the next higher units.
      */
-    function parsePeriodString(period) {
+    function parsePeriodString(period, _distributeOverflow) {
 
         // regex splits as follows
         // grp0 omitted as it is equal to the sample
@@ -131,8 +135,10 @@
         // | PT1M              | 3Y6M4D |      |      |      |      | T1M        |      | 1M   |      |
         // --------------------------------------------------------------------------------------------
 
-        var valueIndexes = [2, 3, 4, 5, 7, 8, 9];
-        var duration = [0, 0, 0, 0, 0, 0, 0];
+        var distributeOverflow = (_distributeOverflow) ? _distributeOverflow : false;
+        var valueIndexes       = [2, 3, 4, 5, 7, 8, 9];
+        var duration           = [0, 0, 0, 0, 0, 0, 0];
+        var overflowLimits     = [0, 12, 4, 7, 24, 60, 60];
         var struct;
 
         // upcase the string just in case people don't follow the letter of the law
@@ -150,11 +156,22 @@
                 var structIndex = valueIndexes[i];
                 duration[i] = struct[structIndex] ? +struct[structIndex].replace(/[A-Za-z]+/g, '') : 0;
             }
-            return duration;
         }
         else {
             throw new Error("String '" + period + "' is not a valid ISO8601 period.");
         }
+
+        if (distributeOverflow) {
+            // note: stop at 1 to ignore overflow of years
+            for (var i = duration.length - 1; i > 0; i--) {
+                if (duration[i] >= overflowLimits[i]) {
+                    duration[i-1] = duration[i-1] + Math.floor(duration[i]/overflowLimits[i]);
+                    duration[i] = duration[i] % overflowLimits[i];
+                }
+            }
+        }
+
+        return duration;
     };
 
 

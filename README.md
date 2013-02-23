@@ -18,13 +18,15 @@ For documentation of ISO 8601, see
 All methods of this library are published within the namespace
 ```nezasa.iso8601.period```. The following methods are currently available.
 
-**Method** ```Array[int] nezasa.iso8601.period.parse(String period)```
+**Method** ```Array[int] nezasa.iso8601.period.parse(String period, Boolean distributeOverflow)```
 
 Takes a ISO 8601 formatted duration and returns an array with 6 elements, one
 per unit. The order of the units, starting with the first element of the array,
 is “year”, “month”, "week", “day”, “hour”, “minute”, “second”.
 
-Example:
+If "distributeOverflow" is set to "true", the overflows are distributed to the higher units.
+
+Examples (distrubtedOverflow = false):
 
 - “PT1S” =\> ```[0, 0, 0, 0, 0, 0, 1]```
 
@@ -32,12 +34,16 @@ Example:
 
 - “P3Y6M1W4DT12H30M17S” =\> ```[3, 6, 1, 4, 12, 30, 17]```
 
+Examples (distrubtedOverflow = true):
+
+- “PT90S” =\> ```[0, 0, 0, 0, 0, 1, 30]```
+
 **Method** ```int nezasa.iso8601.Period.parseToTotalSeconds(String period)```
 
 Takes a ISO 8601 formatted duration and returns the total amount of seconds
 represented by the duration.
 
-**Method** ```String nezasa.iso8601.Period.parseToString(String period, Array[String] unitNames, Array[String] unitNamesPlural)```
+**Method** ```String nezasa.iso8601.Period.parseToString(String period, Boolean distributeOverflow, Array[String] unitNames, Array[String] unitNamesPlural)```
 
 Takes a ISO 8601 formatted duration and returns a more natural representation of
 the period. In order to handle different languages, the method takes two input
@@ -50,6 +56,8 @@ would be
 
 The English versions as shown above represent the default, thus the English unit names
 are used if unitNames and unitNamesPlural remain ```undefined```.
+
+If "distributeOverflow" is set to "true", the overflows are distributed to the higher units.
 
 ## Sample code
 
