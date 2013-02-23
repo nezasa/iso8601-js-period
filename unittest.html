@@ -76,7 +76,7 @@
     test(nezasa.iso8601.Period.parse("PT1M"), "Array output - 1 minute", "PT1M", "0,0,0,0,0,1,0");
     test(nezasa.iso8601.Period.parse("PT1H"), "Array output - 1 hour", "PT1H", "0,0,0,0,1,0,0");
     test(nezasa.iso8601.Period.parse("P1D"), "Array output - 1 day", "P1D", "0,0,0,1,0,0,0");
-    test(nezasa.iso8601.Period.parse("P1W"), "Array output - 1 week", "P1D", "0,0,1,0,0,0,0");
+    test(nezasa.iso8601.Period.parse("P1W"), "Array output - 1 week", "P1W", "0,0,1,0,0,0,0");
     test(nezasa.iso8601.Period.parse("P1M"), "Array output - 1 mounth", "P1M", "0,1,0,0,0,0,0");
     test(nezasa.iso8601.Period.parse("P1Y"), "Array output - 1 year", "P1Y", "1,0,0,0,0,0,0");
     test(nezasa.iso8601.Period.parse("P3Y6M1W4DT12H30M17S"), "Array output - combined period example", "P3Y6M1W4DT12H30M17S", "3,6,1,4,12,30,17");
@@ -106,7 +106,7 @@
     test(nezasa.iso8601.Period.parseToString("P1WT1H"), "string output - combined period example - English units (default)", "P1W1H", "1 week 1 hour");
     test(nezasa.iso8601.Period.parseToString("P1Y4DT1H13M1S"), "string output - combined period example - English units (default)", "P1Y4DT1H13M1S", "1 year 4 days 1 hour 13 minutes 1 second");
     test(nezasa.iso8601.Period.parseToString("P1Y4DT1H3S"), "string output - combined period example - English units (default)", "P1Y4DT1H3S", "1 year 4 days 1 hour 3 seconds");
-    test(nezasa.iso8601.Period.parseToString("P3Y6M4DT12H30M17S"), "string output - combined period example - English units (default)", "P3Y6M4DT12H30M17S", "3 years 6 months 4 days 12 hours 30 minutes 17 seconds");
+    test(nezasa.iso8601.Period.parseToString("P3Y6M3W4DT12H30M17S"), "string output - combined period example - English units (default)", "P3Y6M4DT12H30M17S", "3 years 6 months 3 weeks 4 days 12 hours 30 minutes 17 seconds");
   
     /* test customized unit strings */
     var deUnits = ['Jahr', 'Monat', 'Woche', 'Tag', 'Stunde', 'Minute', 'Sekunde'];
