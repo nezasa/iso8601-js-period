@@ -68,12 +68,12 @@ Please see the unit tests (file: unittest.html).
 A special note about backward compatibility. We hate breaking backward compatibility and try to avoid it. But this lib is tiny, so atm we rather go for new features than always sticking to backward compatibility.
 Nevertheless, the aim of this lib is to give nice support for ISO8601. By the static nature of ISOs, this lib should not change to much neither.
 
-### v0.2 - Feb 23, 2013
+### v0.2.0.0 - Feb 23, 2013
 
 - [NEW] Support for week as unity (contributed by @palamedes)
 - [NEW] Overflow distribution support (70 seconds => 1 minute 10 seconds)
 - [BREAKS] The returned array has length 7 (before 6) because of the week unity.
 
-### v0.1 - Dec 11, 2012
+### v0.1.0.0 - Dec 11, 2012
 
 - initial release
