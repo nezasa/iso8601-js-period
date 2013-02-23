@@ -71,6 +71,7 @@ Nevertheless, the aim of this lib is to give nice support for ISO8601. By the st
 ### v0.2 - "coming soon"
 
 - [NEW] Support for week as unity (contributed by @palamedes)
+- [NEW] Overflow distribution support (70 seconds => 1 minute 10 seconds)
 - [BREAKS] The returned array has length 7 (before 6) because of the week unity.
 
 ### v0.1 - Dec 11, 2012
