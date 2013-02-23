@@ -1,7 +1,7 @@
 /*
  * Shared and maintained by [Nezasa](http://www.nezasa.com)
  * Published under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html)
- * © Nezasa, 2012
+ * © Nezasa, 2012-2013
  *
  * ---
  *
