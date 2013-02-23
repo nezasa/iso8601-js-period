@@ -85,13 +85,13 @@
     /**
      * Returns a more readable string representation of the ISO8601 period.
      * @param period the ISO8601 period string
-     * @param distributeOverflow if 'true', the unit overflows are merge into the next higher units. Defaults to 'false'.
      * @param unitName the names of the time units if there is only one (such as hour or minute).
      *        Defaults to ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'].
      * @param unitNamePlural thenames of the time units if there are several (such as hours or minutes).
      *        Defaults to ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'].
+     * @param distributeOverflow if 'true', the unit overflows are merge into the next higher units. Defaults to 'false'.
      */
-    nezasa.iso8601.Period.parseToString = function(period, distributeOverflow, unitNames, unitNamesPlural) {
+    nezasa.iso8601.Period.parseToString = function(period, unitNames, unitNamesPlural, distributeOverflow) {
 
         var result = ['', '', '', '', '', '', ''];
         var durationPerUnit = parsePeriodString(period, distributeOverflow);
