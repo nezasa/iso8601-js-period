@@ -141,8 +141,8 @@
         var overflowLimits     = [0, 12, 4, 7, 24, 60, 60];
         var struct;
 
-        // upcase the string just in case people don't follow the letter of the law
-        period = period.toUpperCase();
+        // upcase and clear whitespace on the string just in case people don't follow the letter of the law
+        period = period.toUpperCase().trim();
 
         // input validation
         if (!period)                         return duration;
