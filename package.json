@@ -2,7 +2,7 @@
   "name": "iso8601-js-period",
   "version": "0.2.0",
   "description": "Javascript library for parsing of ISO 8601 durations",
-  "main": "iso8601.min.js",
+  "main": "iso8601.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mdartic/iso8601-js-period.git"
