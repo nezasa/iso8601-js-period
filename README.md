@@ -1,4 +1,6 @@
-Shared and maintained by [Nezasa](http://www.nezasa.com) | Published under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html) | © Nezasa, 2012-2013
+Shared and maintained by [Nezasa](http://www.nezasa.com) and @mdartic due to inactivity from main programmer 
+
+Published under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html) | © Nezasa, 2012-2013
 
 ---
 
@@ -67,6 +69,10 @@ Please see the unit tests (file: unittest.html).
 
 A special note about backward compatibility. We hate breaking backward compatibility and try to avoid it. But this lib is tiny, so atm we rather go for new features than always sticking to backward compatibility.
 Nevertheless, the aim of this lib is to give nice support for ISO8601. By the static nature of ISOs, this lib should not change to much neither.
+
+### v0.2.1 - Oct 11, 2017
+
+- Add CommonJS/AMD support (@murb )
 
 ### v0.2.0.0 - Feb 23, 2013
 
