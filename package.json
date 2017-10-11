@@ -1,6 +1,6 @@
 {
   "name": "iso8601-js-period",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Javascript library for parsing of ISO 8601 durations",
   "main": "iso8601.js",
   "repository": {
