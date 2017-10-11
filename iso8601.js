@@ -10,6 +10,8 @@
  *
  * @author Nezasa AG -- https://github.com/nezasa
  * @contributor Jason "Palamedes" Ellis -- https://github.com/palamedes
+ * @contributor mdartic -- https://github.com/mdartic
+ * @contributor murb -- https://github.com/murb
  */
 
 
