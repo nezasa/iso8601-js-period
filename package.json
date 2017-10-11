@@ -1,0 +1,22 @@
+{
+  "name": "iso8601-js-period",
+  "version": "0.2.1",
+  "description": "Javascript library for parsing of ISO 8601 durations",
+  "main": "iso8601.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdartic/iso8601-js-period.git"
+  },
+  "keywords": [
+    "iso8601",
+    "period",
+    "date",
+    "time"
+  ],
+  "author": "Nezasa",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/mdartic/iso8601-js-period/issues"
+  },
+  "homepage": "https://github.com/mdartic/iso8601-js-period#readme"
+}

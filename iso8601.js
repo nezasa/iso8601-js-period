@@ -5,25 +5,45 @@
  *
  * ---
  *
- * Javascript library for parsing of ISO 8601 durations. Supported are durations of 
+ * Javascript library for parsing of ISO 8601 durations. Supported are durations of
  * the form P3Y6M4DT12H30M17S or PT1S or P1Y4DT1H3S etc.
  *
  * @author Nezasa AG -- https://github.com/nezasa
  * @contributor Jason "Palamedes" Ellis -- https://github.com/palamedes
+ * @contributor mdartic -- https://github.com/mdartic
+ * @contributor murb -- https://github.com/murb
  */
 
-(function( nezasa, undefined ) {
+
+// if the module has no dependencies, the above pattern can be simplified to
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define([], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory();
+    } else {
+        // Browser globals (root is window)
+        // maintaining nezasa global
+        if (!root.nezasa) root.nezasa = {};
+        if (!root.nezasa.iso8601) root.nezasa.iso8601 = factory();
+    }
+}(this, function () {
+    var iso8601 = {
+        Period: {}
+    };
 
     // create sub packages
-    if (!nezasa.iso8601) nezasa.iso8601 = {};
-    if (!nezasa.iso8601.Period) nezasa.iso8601.Period = {};
 
     //---- public properties
 
     /**
      * version of the ISO8601 version
      */
-    nezasa.iso8601.version = '0.2';
+    iso8601.version = '0.2';
 
     //---- public methods
 
@@ -42,14 +62,14 @@
      * @param period iso8601 period string
      * @param distributeOverflow if 'true', the unit overflows are merge into the next higher units. Defaults to 'false'.
      */
-    nezasa.iso8601.Period.parse = function(period, distributeOverflow) {
+    iso8601.Period.parse = function(period, distributeOverflow) {
         return parsePeriodString(period, distributeOverflow);
     };
 
     /**
      * Returns the total duration of the period in seconds.
      */
-    nezasa.iso8601.Period.parseToTotalSeconds = function(period) {
+    iso8601.Period.parseToTotalSeconds = function(period) {
 
         var multiplicators = [31104000 /* year   (360*24*60*60) */,
             2592000  /* month  (30*24*60*60) */,
@@ -73,7 +93,7 @@
      * @param period
      * @return {Boolean}
      */
-    nezasa.iso8601.Period.isValid = function(period) {
+    iso8601.Period.isValid = function(period) {
         try {
             parsePeriodString(period);
             return true;
@@ -91,7 +111,7 @@
      *        Defaults to ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'].
      * @param distributeOverflow if 'true', the unit overflows are merge into the next higher units. Defaults to 'false'.
      */
-    nezasa.iso8601.Period.parseToString = function(period, unitNames, unitNamesPlural, distributeOverflow) {
+    iso8601.Period.parseToString = function(period, unitNames, unitNamesPlural, distributeOverflow) {
 
         var result = ['', '', '', '', '', '', ''];
         var durationPerUnit = parsePeriodString(period, distributeOverflow);
@@ -174,6 +194,8 @@
         return duration;
     };
 
+    return iso8601;
 
-}( window.nezasa = window.nezasa || {} ));
+}));
+
 
